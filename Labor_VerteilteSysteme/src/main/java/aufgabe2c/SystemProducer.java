@@ -23,7 +23,7 @@ public class SystemProducer {
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
-        System.out.println("Producer gestartet...");
+        System.out.println("Producer starten");
 
         while (true) {
             Map<String, Object> data = new HashMap<>();
@@ -33,7 +33,7 @@ public class SystemProducer {
 
             String json = mapper.writeValueAsString(data);
 
-            producer.send(new ProducerRecord<>("vlvs_inf22_gruppeB", "system", json));
+            producer.send(new ProducerRecord<>("vlvs_inf23_gruppeRCK", "system", json));
             System.out.println("Gesendet: " + json);
 
             Thread.sleep(5000);
