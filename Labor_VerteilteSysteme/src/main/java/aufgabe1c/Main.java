@@ -43,7 +43,7 @@ public class Main {
                                 );
 
                                 try {
-                                    WeatherData data = objectMapper.readValue(json, WeatherData.class);
+                                    WeatherData1c data = objectMapper.readValue(json, WeatherData1c.class);
                                     printWeatherData(data);
                                 } catch (Exception e) {
                                     System.out.println("Fehler beim Parsen der Wetterdaten:");
@@ -62,7 +62,7 @@ public class Main {
         waitForever.await();
     }
 
-    private static void printWeatherData(WeatherData data) {
+    private static void printWeatherData(WeatherData1c data) {
         System.out.println("========== Wetterdaten ==========");
         System.out.println("Zeit:              " + LocalDateTime.now());
         System.out.println("Temperatur:        " + data.Temp + " °C");
