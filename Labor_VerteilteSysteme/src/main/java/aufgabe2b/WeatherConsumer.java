@@ -28,7 +28,7 @@ public class WeatherConsumer {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(3));
             for (ConsumerRecord<String, String> record : records) {
                 try {
-                    WeatherData w = mapper.readValue(record.value(), WeatherData.class);
+                    WeatherData2b w = mapper.readValue(record.value(), WeatherData2b.class);
                     if (w.getCity().equals("Mosbach") || w.getCity().equals("Stuttgart") || w.getCity().equals("Bad Mergentheim")) {
                         System.out.println(w);
                     }
