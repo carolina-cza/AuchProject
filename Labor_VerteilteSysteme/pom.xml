@@ -12,6 +12,7 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -25,21 +26,22 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- MQTT (für Person A) -->
+
+        <!-- MQTT -->
         <dependency>
             <groupId>com.hivemq</groupId>
             <artifactId>hivemq-mqtt-client</artifactId>
             <version>1.3.3</version>
         </dependency>
 
-        <!-- Kafka (für Person B) -->
+        <!-- Kafka -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>3.7.0</version>
         </dependency>
 
-        <!-- JSON parsen -->
+        <!-- JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -53,11 +55,67 @@
             <version>2.0.13</version>
         </dependency>
 
+        <!-- Metrics -->
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-graphite</artifactId>
             <version>4.2.25</version>
         </dependency>
+
+        <!-- ========================= -->
+        <!-- TESTING                   -->
+        <!-- ========================= -->
+
+        <!-- JUnit 5 API -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit 5 Engine -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Optional: Assertions / Parameterized Tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- Java Compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
+            <!-- JUnit 5 aktivieren -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
