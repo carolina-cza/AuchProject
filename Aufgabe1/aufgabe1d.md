@@ -134,17 +134,4 @@ Schreibe Nachrichten. Mit /exit beenden.
 > Hallo, mein Chat-Client funktioniert!
 
 [/aichat/default] {"clientId":"AuchChat-123","name":"RCK","message":"Hallo, mein Chat-Client funktioniert!","timestamp":1777380000000}
-```
 
-Damit wurde nachgewiesen, dass der Client:
-
-```text
-Nachrichten über MQTT empfangen kann
-eigene Chatnachrichten über MQTT senden kann
-Statusmeldungen beim Start veröffentlicht
-beim Beenden eine Statusmeldung sendet
-einen Last Will verwendet
-UTF-8 und application/json für Chatnachrichten nutzt
-```
-
----
