@@ -17,7 +17,7 @@ public class GrafanaPipeline {
     private static final String GRAPHITE_HOST = "10.50.15.52";
     private static final int GRAPHITE_PORT = 2003;
 
-    // Präfix mit Gruppen-ID damit keine Kollissionen mit anderen Gruppen
+    // Präfix mit Gruppen-ID
     private static final String PREFIX = "vlvs_inf23_RKC";
 
     public static void main(String[] args) throws Exception {
@@ -47,20 +47,19 @@ public class GrafanaPipeline {
                 try {
                     WeatherData2d w = mapper.readValue(record.value(), WeatherData2d.class);
 
-                    // Nur die 3 Städte
+                  
                     if (!w.getCity().equals("Mosbach") &&
                             !w.getCity().equals("Stuttgart") &&
                             !w.getCity().equals("Bad Mergentheim")) {
                         continue;
                     }
 
-                    // Stadtname normalisieren (kein Leerzeichen erlaubt in Graphite)
+                    // Stadtname normalisieren
                     String city = w.getCity()
                             .toLowerCase()
                             .replace(" ", "_");
 
-                    // Timestamp: Graphite braucht Sekunden, Java gibt Millisekunden
-                    // timeStamp ist ein String wie "2023-04-08T00:02:06.041+00:00"
+                    
                     long timestamp = java.time.OffsetDateTime
                             .parse(w.getTimeStamp())
                             .toEpochSecond();
@@ -76,7 +75,7 @@ public class GrafanaPipeline {
                     System.err.println("Fehler: " + e.getMessage());
                 }
             }
-            // Offset speichern damit wir nicht immer von vorne anfangen
+            
             consumer.commitSync();
         }
     }
